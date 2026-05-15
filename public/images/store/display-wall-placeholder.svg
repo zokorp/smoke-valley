@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Product display photo placeholder</title>
+  <desc id="desc">Generated neutral placeholder for a future Smoke Valley product display photo.</desc>
+  <rect width="1200" height="900" fill="#f2fbf7"/>
+  <rect x="140" y="120" width="920" height="640" rx="30" fill="#ffffff" stroke="#d9dfdc" stroke-width="8"/>
+  <g fill="#edf2ef" stroke="#d9dfdc" stroke-width="4">
+    <rect x="210" y="190" width="180" height="160" rx="18"/>
+    <rect x="430" y="190" width="180" height="160" rx="18"/>
+    <rect x="650" y="190" width="180" height="160" rx="18"/>
+    <rect x="210" y="395" width="180" height="160" rx="18"/>
+    <rect x="430" y="395" width="180" height="160" rx="18"/>
+    <rect x="650" y="395" width="180" height="160" rx="18"/>
+    <rect x="870" y="190" width="120" height="365" rx="18"/>
+  </g>
+  <g fill="#166345">
+    <rect x="245" y="242" width="110" height="24" rx="12"/>
+    <rect x="465" y="242" width="110" height="24" rx="12"/>
+    <rect x="685" y="242" width="110" height="24" rx="12"/>
+    <rect x="245" y="447" width="110" height="24" rx="12"/>
+    <rect x="465" y="447" width="110" height="24" rx="12"/>
+    <rect x="685" y="447" width="110" height="24" rx="12"/>
+  </g>
+  <text x="600" y="820" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#6b7773">Placeholder: replace with real product display photo</text>
+</svg>

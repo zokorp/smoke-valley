@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-labelledby="title desc">
+  <title id="title">Vape product placeholder</title>
+  <desc id="desc">Generated neutral placeholder for a future vape product image.</desc>
+  <rect width="900" height="675" fill="#f7f8f7"/>
+  <rect x="240" y="120" width="420" height="435" rx="42" fill="#ffffff" stroke="#d9dfdc" stroke-width="8"/>
+  <rect x="330" y="180" width="80" height="315" rx="30" fill="#166345"/>
+  <rect x="452" y="160" width="118" height="350" rx="38" fill="#dff5eb"/>
+  <rect x="350" y="230" width="40" height="120" rx="20" fill="#ffffff"/>
+  <text x="450" y="605" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#6b7773">Product image placeholder</text>
+</svg>

@@ -1,0 +1,52 @@
+---
+import { MapPin, Phone } from '@lucide/astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { business } from '@data/business';
+---
+
+<BaseLayout
+  title="Rewards | Smoke Valley Smoke Shop"
+  description="Learn about the Smoke Valley in-store rewards program in Richmond, TX. Join by phone number in store and ask staff about available rewards and promotions."
+  path="/rewards/"
+>
+  <section class="section-pad bg-white">
+    <div class="container-padded grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+      <div class="section-heading">
+        <h1 class="text-5xl md:text-6xl">Rewards available in-store</h1>
+        <p>
+          Join Smoke Valley rewards at checkout by phone number. We are not collecting phone numbers online in Phase 1.
+        </p>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+          <a class="button-primary" href={business.directionsUrl} target="_blank" rel="noreferrer">
+            <MapPin size={18} aria-hidden="true" />
+            Visit us in store
+          </a>
+          <a class="button-secondary" href={business.phoneHref}>
+            <Phone size={18} aria-hidden="true" />
+            Call Store
+          </a>
+        </div>
+      </div>
+      <div class="media-frame aspect-[4/3] shadow-[var(--shadow-soft)]">
+        <img class="h-full w-full object-cover" src="/images/store/counter-placeholder.svg" alt="Placeholder for Smoke Valley checkout counter photo" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad retail-band">
+    <div class="container-padded grid gap-5 md:grid-cols-3">
+      <div class="card p-6">
+        <h2 class="text-2xl font-black text-charcoal-900">1. Ask staff</h2>
+        <p class="mt-3 leading-7 text-smoke-500">Tell the Smoke Valley team you want to join rewards when you check out in store.</p>
+      </div>
+      <div class="card p-6">
+        <h2 class="text-2xl font-black text-charcoal-900">2. Use your phone number</h2>
+        <p class="mt-3 leading-7 text-smoke-500">Rewards are connected in store by phone number. No online form is active yet.</p>
+      </div>
+      <div class="card p-6">
+        <h2 class="text-2xl font-black text-charcoal-900">3. Watch for updates</h2>
+        <p class="mt-3 leading-7 text-smoke-500">Follow social pages once links are live and ask staff about current rewards or promotions.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

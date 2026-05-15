@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-labelledby="title desc">
+  <title id="title">Hookah product placeholder</title>
+  <desc id="desc">Generated neutral placeholder for a future hookah product image.</desc>
+  <rect width="900" height="675" fill="#f2fbf7"/>
+  <path d="M450 130v245" stroke="#166345" stroke-width="32" stroke-linecap="round"/>
+  <path d="M360 420c0-65 180-65 180 0 0 70-180 70-180 0z" fill="#ffffff" stroke="#d9dfdc" stroke-width="8"/>
+  <path d="M450 250c120 0 165 45 170 110" fill="none" stroke="#2f3b39" stroke-width="20" stroke-linecap="round"/>
+  <rect x="390" y="90" width="120" height="70" rx="24" fill="#dff5eb" stroke="#d9dfdc" stroke-width="6"/>
+  <text x="450" y="605" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#6b7773">Product image placeholder</text>
+</svg>

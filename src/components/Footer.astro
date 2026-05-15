@@ -1,0 +1,80 @@
+---
+import { Mail, MapPin, Phone } from '@lucide/astro';
+import { business } from '@data/business';
+import { navigation } from '@data/navigation';
+import { socialLinks } from '@data/socials';
+---
+
+<footer class="border-t border-smoke-200 bg-charcoal-900 text-white">
+  <div class="container-padded grid gap-10 py-12 md:grid-cols-[1.4fr_1fr_1fr]">
+    <div>
+      <a href="/" class="inline-flex items-center gap-3">
+        <span class="grid h-11 w-11 place-items-center rounded-full bg-valley-600 text-sm font-black">SV</span>
+        <span>
+          <span class="block text-lg font-black">Smoke Valley</span>
+          <span class="block text-sm font-bold text-smoke-200">Smoke Valley Smoke Shop</span>
+        </span>
+      </a>
+      <p class="mt-5 max-w-md text-sm leading-7 text-smoke-200">
+        Richmond’s local stop for vapes, hookah, glass, accessories, CBD/Hemp, kratom, and more. Products are intended only for adults 21+.
+      </p>
+      <p class="mt-4 text-sm font-bold text-smoke-200">No online sales or checkout are available on this website.</p>
+    </div>
+
+    <div>
+      <h2 class="text-sm font-black uppercase tracking-[0.16em] text-smoke-200">Visit</h2>
+      <ul class="mt-4 grid gap-3 text-sm text-smoke-100">
+        <li class="flex gap-2">
+          <MapPin class="mt-0.5 shrink-0 text-valley-100" size={18} aria-hidden="true" />
+          <a class="hover:text-white" href={business.directionsUrl} target="_blank" rel="noreferrer">{business.formattedAddress}</a>
+        </li>
+        <li class="flex gap-2">
+          <Phone class="mt-0.5 shrink-0 text-valley-100" size={18} aria-hidden="true" />
+          <a class="hover:text-white" href={business.phoneHref}>{business.phoneDisplay}</a>
+        </li>
+        <li class="flex gap-2">
+          <Mail class="mt-0.5 shrink-0 text-valley-100" size={18} aria-hidden="true" />
+          <a class="hover:text-white" href={business.emailHref}>{business.email}</a>
+        </li>
+      </ul>
+      <div class="mt-5 text-sm text-smoke-100">
+        {
+          business.hours.map((hour) => (
+            <p>
+              <span class="font-bold">{hour.label}:</span> {hour.display}
+            </p>
+          ))
+        }
+      </div>
+    </div>
+
+    <div>
+      <h2 class="text-sm font-black uppercase tracking-[0.16em] text-smoke-200">Links</h2>
+      <nav class="mt-4 grid grid-cols-2 gap-2 text-sm text-smoke-100" aria-label="Footer navigation">
+        {navigation.map((item) => <a class="hover:text-white" href={item.href}>{item.label}</a>)}
+        <a class="hover:text-white" href="/disclaimers/">Disclaimers</a>
+      </nav>
+      <div class="mt-6 flex flex-wrap gap-2">
+        {
+          socialLinks.map((social) =>
+            social.url ? (
+              <a class="rounded-full border border-white/20 px-3 py-1.5 text-sm font-bold text-smoke-100 hover:border-white hover:text-white" href={social.url} target="_blank" rel="noreferrer">
+                {social.label}
+              </a>
+            ) : (
+              <span class="rounded-full border border-white/10 px-3 py-1.5 text-sm font-bold text-smoke-300" title="Social URL placeholder">
+                {social.label}
+              </span>
+            ),
+          )
+        }
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="container-padded flex flex-col gap-3 py-5 text-sm text-smoke-200 md:flex-row md:items-center md:justify-between">
+      <p>&copy; {new Date().getFullYear()} Smoke Valley. Adults 21+ only.</p>
+      <p>Valid government-issued ID may be required in store. Product selection may vary.</p>
+    </div>
+  </div>
+</footer>

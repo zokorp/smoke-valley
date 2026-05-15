@@ -1,0 +1,87 @@
+---
+import { MapPin, MessageCircle, Phone, Star } from '@lucide/astro';
+import { business } from '@data/business';
+
+const slides = [
+  {
+    src: '/images/store/storefront-placeholder.svg',
+    alt: 'Placeholder for Smoke Valley storefront photo',
+  },
+  {
+    src: '/images/store/interior-placeholder.svg',
+    alt: 'Placeholder for Smoke Valley shop interior photo',
+  },
+  {
+    src: '/images/store/display-wall-placeholder.svg',
+    alt: 'Placeholder for Smoke Valley product display photo',
+  },
+];
+---
+
+<section class="overflow-hidden bg-white">
+  <div class="container-padded grid gap-8 py-7 lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:gap-10 lg:py-14">
+    <div class="section-heading">
+      <h1 class="text-[clamp(2.35rem,10vw,5.2rem)]">Smoke Valley Smoke Shop</h1>
+      <p class="max-w-2xl text-lg">{business.tagline}</p>
+      <div class="mt-5 grid gap-2 text-sm font-bold text-charcoal-700 min-[360px]:grid-cols-2 sm:gap-3">
+        <p class="flex items-center gap-2 rounded-2xl bg-smoke-50 p-3">
+          <MapPin size={18} class="text-valley-700" aria-hidden="true" />
+          {business.formattedAddress}
+        </p>
+        <p class="rounded-2xl bg-smoke-50 p-3">Mon-Sat 10 AM-10 PM | Sun 10 AM-7 PM</p>
+      </div>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a class="button-primary" href={business.phoneHref}>
+          <Phone size={18} aria-hidden="true" />
+          Call Store
+        </a>
+        <a class="button-secondary" href={business.whatsappHref} target="_blank" rel="noreferrer">
+          <MessageCircle size={18} aria-hidden="true" />
+          WhatsApp Store
+        </a>
+        <a class="button-secondary" href={business.directionsUrl} target="_blank" rel="noreferrer">
+          <MapPin size={18} aria-hidden="true" />
+          Get Directions
+        </a>
+      </div>
+    </div>
+
+    <div class="relative">
+      <div class="media-frame relative aspect-[16/8] shadow-[var(--shadow-soft)] sm:aspect-[5/4] lg:aspect-[4/5]">
+        {
+          slides.map((slide, index) => (
+            <div class:list={['hero-slide', { 'is-active': index === 0 }]} data-hero-slide>
+              <img src={slide.src} alt={slide.alt} loading={index === 0 ? 'eager' : 'lazy'} />
+            </div>
+          ))
+        }
+      </div>
+      <a
+        class="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-4 rounded-2xl border border-white/70 bg-white/90 p-4 shadow-lg backdrop-blur"
+        href={business.reviewUrl}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span>
+          <span class="block text-sm font-black text-charcoal-900">Had a good visit?</span>
+          <span class="block text-sm font-bold text-smoke-500">Leave us a Google review.</span>
+        </span>
+        <Star size={22} class="shrink-0 text-valley-700" aria-hidden="true" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('[data-hero-slide]'));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let activeSlide = 0;
+
+  if (slides.length > 1 && !reduceMotion) {
+    window.setInterval(() => {
+      slides[activeSlide]?.classList.remove('is-active');
+      activeSlide = (activeSlide + 1) % slides.length;
+      slides[activeSlide]?.classList.add('is-active');
+    }, 4500);
+  }
+</script>

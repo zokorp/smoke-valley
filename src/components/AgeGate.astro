@@ -1,0 +1,75 @@
+<div class="age-gate" id="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
+  <section class="age-gate__panel" aria-describedby="age-gate-copy">
+    <p class="mb-3 text-sm font-black uppercase tracking-[0.16em] text-valley-700">Adults 21+ only</p>
+    <h2 id="age-gate-title">Verify your age</h2>
+    <p id="age-gate-copy" class="mt-4">
+      Smoke Valley products and website content are intended only for adults 21 years of age or older.
+      Please enter your date of birth to continue.
+    </p>
+    <form class="age-gate__form" id="age-gate-form">
+      <label for="age-gate-dob">Date of birth</label>
+      <input id="age-gate-dob" name="dob" type="date" required autocomplete="bday" />
+      <button class="button-primary w-full" type="submit">Enter site</button>
+      <p class="age-gate__message" id="age-gate-message" aria-live="polite"></p>
+    </form>
+    <p class="mt-4 text-sm">
+      Age verification on this website does not replace in-store ID verification. A valid government-issued ID may be required in store.
+    </p>
+    <noscript>
+      <p class="age-gate__message">JavaScript is required to complete age verification for this website.</p>
+    </noscript>
+  </section>
+</div>
+
+<script>
+  const key = 'smoke-valley-age-verified';
+  const form = document.getElementById('age-gate-form') as HTMLFormElement | null;
+  const input = document.getElementById('age-gate-dob') as HTMLInputElement | null;
+  const message = document.getElementById('age-gate-message');
+
+  const getAge = (dateValue: string) => {
+    const [birthYear, birthMonth, birthDay] = dateValue.split('-').map(Number);
+    const today = new Date();
+    let age = today.getFullYear() - birthYear;
+    const currentMonth = today.getMonth() + 1;
+    const currentDay = today.getDate();
+
+    if (currentMonth < birthMonth || (currentMonth === birthMonth && currentDay < birthDay)) {
+      age -= 1;
+    }
+
+    return age;
+  };
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    if (!input?.value) {
+      if (message) message.textContent = 'Please enter your date of birth.';
+      return;
+    }
+
+    const age = getAge(input.value);
+
+    if (Number.isNaN(age) || age < 0) {
+      if (message) message.textContent = 'Please enter a valid date of birth.';
+      return;
+    }
+
+    if (age >= 21) {
+      try {
+        window.localStorage.setItem(key, 'true');
+      } catch {
+        // Local storage may be unavailable in strict privacy modes; allow the current session.
+      }
+      document.documentElement.dataset.ageVerified = 'true';
+      if (message) message.textContent = '';
+      return;
+    }
+
+    if (message) {
+      message.textContent = 'You must be 21 or older to access this website.';
+    }
+    form.dataset.denied = 'true';
+  });
+</script>

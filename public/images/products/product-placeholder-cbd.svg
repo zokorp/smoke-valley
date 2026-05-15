@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-labelledby="title desc">
+  <title id="title">CBD and hemp product placeholder</title>
+  <desc id="desc">Generated neutral placeholder for future CBD and hemp product images.</desc>
+  <rect width="900" height="675" fill="#f2fbf7"/>
+  <rect x="285" y="170" width="330" height="330" rx="42" fill="#ffffff" stroke="#d9dfdc" stroke-width="8"/>
+  <path d="M450 410c-60-65-88-126-42-166 28-24 64-12 82 20 16-32 54-45 82-20 46 40 18 101-42 166z" fill="#166345"/>
+  <text x="450" y="605" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#6b7773">Product image placeholder</text>
+</svg>

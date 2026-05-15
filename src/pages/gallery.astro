@@ -1,0 +1,43 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { business } from '@data/business';
+
+const gallery = [
+  { src: '/images/store/storefront-placeholder.svg', alt: 'Placeholder for Smoke Valley storefront photo' },
+  { src: '/images/store/interior-placeholder.svg', alt: 'Placeholder for Smoke Valley interior photo' },
+  { src: '/images/store/display-wall-placeholder.svg', alt: 'Placeholder for Smoke Valley product wall photo' },
+  { src: '/images/store/counter-placeholder.svg', alt: 'Placeholder for Smoke Valley checkout counter photo' },
+];
+---
+
+<BaseLayout
+  title="Gallery | Smoke Valley Smoke Shop"
+  description="View the Smoke Valley Smoke Shop gallery placeholders for storefront and shop photos in Richmond, TX. Real store photos can be added before launch."
+  path="/gallery/"
+>
+  <section class="section-pad bg-white">
+    <div class="container-padded">
+      <div class="section-heading">
+        <h1 class="text-5xl md:text-6xl">Gallery</h1>
+        <p>Storefront and shop photos will live here. Current images are neutral placeholders to replace before launch.</p>
+      </div>
+      <div class="mt-8 grid gap-5 sm:grid-cols-2">
+        {
+          gallery.map((image) => (
+            <figure class="media-frame">
+              <img class="aspect-[4/3] h-full w-full object-cover" src={image.src} alt={image.alt} loading="lazy" />
+            </figure>
+          ))
+        }
+      </div>
+      <div class="mt-8 rounded-2xl border border-smoke-200 bg-smoke-50 p-6">
+        <h2 class="text-2xl font-black text-charcoal-900">Visit Smoke Valley</h2>
+        <p class="mt-2 leading-7 text-smoke-500">{business.formattedAddress}</p>
+        <div class="mt-5 flex flex-col gap-3 sm:flex-row">
+          <a class="button-primary" href={business.directionsUrl} target="_blank" rel="noreferrer">Get Directions</a>
+          <a class="button-secondary" href={business.phoneHref}>Call Store</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

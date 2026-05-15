@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-labelledby="title desc">
+  <title id="title">Glass product placeholder</title>
+  <desc id="desc">Generated neutral placeholder for a future glass product image.</desc>
+  <rect width="900" height="675" fill="#ffffff"/>
+  <path d="M400 105h100l-16 180 82 210c10 25-8 55-35 55H369c-27 0-45-30-35-55l82-210z" fill="#dff5eb" stroke="#166345" stroke-width="10"/>
+  <path d="M390 430h120" stroke="#ffffff" stroke-width="18" stroke-linecap="round"/>
+  <text x="450" y="605" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#6b7773">Product image placeholder</text>
+</svg>

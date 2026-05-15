@@ -1,0 +1,54 @@
+---
+import AgeGate from '@components/AgeGate.astro';
+import Footer from '@components/Footer.astro';
+import Header from '@components/Header.astro';
+import Seo from '@components/Seo.astro';
+import WhatsAppButton from '@components/WhatsAppButton.astro';
+import { getLocalBusinessSchema } from '@data/schema';
+import '@styles/global.css';
+
+type Props = {
+  title: string;
+  description: string;
+  path?: string;
+  image?: string;
+};
+
+const { title, description, path, image } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Seo title={title} description={description} path={path} image={image} jsonLd={getLocalBusinessSchema()} />
+    <script is:inline>
+      (() => {
+        const key = 'smoke-valley-age-verified';
+        try {
+          const params = new URLSearchParams(window.location.search);
+          if (params.get('resetAgeGate') === '1') {
+            window.localStorage.removeItem(key);
+          }
+
+          if (window.localStorage.getItem(key) === 'true') {
+            document.documentElement.dataset.ageVerified = 'true';
+          }
+        } catch {
+          document.documentElement.dataset.agePending = 'true';
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <AgeGate />
+    <div class="site-shell min-h-screen">
+      <a href="#main-content" class="skip-link">Skip to content</a>
+      <Header />
+      <main id="main-content">
+        <slot />
+      </main>
+      <Footer />
+      <WhatsAppButton />
+    </div>
+  </body>
+</html>

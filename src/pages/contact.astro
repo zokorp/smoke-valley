@@ -1,0 +1,94 @@
+---
+import { Mail, MapPin, MessageCircle, Phone } from '@lucide/astro';
+import MapEmbed from '@components/MapEmbed.astro';
+import StoreHours from '@components/StoreHours.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { business } from '@data/business';
+---
+
+<BaseLayout
+  title="Contact Smoke Valley Smoke Shop"
+  description="Contact Smoke Valley Smoke Shop in Richmond, TX by phone, WhatsApp, email, or directions. Visit us at 1800 FM 359 Road."
+  path="/contact/"
+>
+  <section class="section-pad bg-white">
+    <div class="container-padded">
+      <div class="section-heading">
+        <h1 class="text-5xl md:text-6xl">Contact Smoke Valley</h1>
+        <p>Call, message, email, or visit the store. This website does not accept online orders or collect rewards signups.</p>
+      </div>
+
+      <div class="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <a class="card p-5 hover:-translate-y-1 transition" href={business.phoneHref}>
+          <Phone size={24} class="text-valley-700" aria-hidden="true" />
+          <h2 class="mt-4 text-xl font-black text-charcoal-900">Phone</h2>
+          <p class="mt-2 text-sm font-bold text-smoke-500">{business.phoneDisplay}</p>
+        </a>
+        <a class="card p-5 hover:-translate-y-1 transition" href={business.whatsappHref} target="_blank" rel="noreferrer">
+          <MessageCircle size={24} class="text-valley-700" aria-hidden="true" />
+          <h2 class="mt-4 text-xl font-black text-charcoal-900">WhatsApp</h2>
+          <p class="mt-2 text-sm font-bold text-smoke-500">{business.whatsappDisplay}</p>
+        </a>
+        <a class="card p-5 hover:-translate-y-1 transition" href={business.emailHref}>
+          <Mail size={24} class="text-valley-700" aria-hidden="true" />
+          <h2 class="mt-4 text-xl font-black text-charcoal-900">Email</h2>
+          <p class="mt-2 break-words text-sm font-bold text-smoke-500">{business.email}</p>
+        </a>
+        <a class="card p-5 hover:-translate-y-1 transition" href={business.directionsUrl} target="_blank" rel="noreferrer">
+          <MapPin size={24} class="text-valley-700" aria-hidden="true" />
+          <h2 class="mt-4 text-xl font-black text-charcoal-900">Address</h2>
+          <p class="mt-2 text-sm font-bold text-smoke-500">{business.formattedAddress}</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad retail-band">
+    <div class="container-padded grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+      <div class="grid gap-5">
+        <StoreHours />
+        <form class="card grid gap-4 p-6" id="mailto-form" action={business.emailHref} method="post" enctype="text/plain">
+          <div>
+            <h2 class="text-2xl font-black text-charcoal-900">Email Smoke Valley</h2>
+            <p class="mt-2 text-sm leading-6 text-smoke-500">This form opens your email app. No message is stored on the website.</p>
+          </div>
+          <label class="grid gap-2">
+            <span class="text-sm font-black text-charcoal-900">Name</span>
+            <input class="min-h-12 rounded-xl border border-smoke-200 px-4" name="name" autocomplete="name" />
+          </label>
+          <label class="grid gap-2">
+            <span class="text-sm font-black text-charcoal-900">Email</span>
+            <input class="min-h-12 rounded-xl border border-smoke-200 px-4" name="email" type="email" autocomplete="email" />
+          </label>
+          <label class="grid gap-2">
+            <span class="text-sm font-black text-charcoal-900">Subject</span>
+            <input class="min-h-12 rounded-xl border border-smoke-200 px-4" name="subject" value="Question for Smoke Valley" />
+          </label>
+          <label class="grid gap-2">
+            <span class="text-sm font-black text-charcoal-900">Message</span>
+            <textarea class="min-h-32 rounded-xl border border-smoke-200 px-4 py-3" name="message"></textarea>
+          </label>
+          <button class="button-primary" type="submit">Open email app</button>
+          <a class="button-secondary" href={business.emailHref}>Email Smoke Valley</a>
+        </form>
+      </div>
+      <MapEmbed />
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const mailtoForm = document.getElementById('mailto-form') as HTMLFormElement | null;
+
+  mailtoForm?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const formData = new FormData(mailtoForm);
+    const name = String(formData.get('name') ?? '').trim();
+    const email = String(formData.get('email') ?? '').trim();
+    const subject = String(formData.get('subject') ?? 'Question for Smoke Valley').trim();
+    const message = String(formData.get('message') ?? '').trim();
+    const body = [`Name: ${name || 'Not provided'}`, `Email: ${email || 'Not provided'}`, '', message].join('\n');
+
+    window.location.href = `mailto:${'smokevalleyusa@gmail.com'}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-labelledby="title desc">
+  <title id="title">Snacks and drinks product placeholder</title>
+  <desc id="desc">Generated neutral placeholder for future snacks and drinks images.</desc>
+  <rect width="900" height="675" fill="#f7f8f7"/>
+  <rect x="260" y="185" width="160" height="290" rx="28" fill="#ffffff" stroke="#d9dfdc" stroke-width="8"/>
+  <rect x="480" y="145" width="150" height="330" rx="42" fill="#dff5eb" stroke="#d9dfdc" stroke-width="8"/>
+  <rect x="292" y="250" width="96" height="90" rx="18" fill="#166345"/>
+  <text x="450" y="605" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#6b7773">Product image placeholder</text>
+</svg>
