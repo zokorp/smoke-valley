@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
-  <title id="title">Counter photo placeholder</title>
-  <desc id="desc">Generated neutral placeholder for a future Smoke Valley checkout counter photo.</desc>
+  <title id="title">Smoke Valley rewards brand graphic</title>
+  <desc id="desc">Clean branded retail graphic for Smoke Valley rewards and checkout information.</desc>
   <rect width="1200" height="900" fill="#ffffff"/>
   <rect x="110" y="210" width="980" height="430" rx="32" fill="#f7f8f7" stroke="#d9dfdc" stroke-width="8"/>
   <rect x="210" y="470" width="780" height="210" rx="22" fill="#2f3b39"/>
@@ -9,5 +9,5 @@
   <circle cx="300" cy="570" r="22" fill="#dff5eb"/>
   <circle cx="380" cy="570" r="22" fill="#dff5eb"/>
   <circle cx="460" cy="570" r="22" fill="#dff5eb"/>
-  <text x="600" y="820" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#6b7773">Placeholder: replace with real checkout counter photo</text>
+  <text x="600" y="820" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#6b7773">Rewards available in store</text>
 </svg>

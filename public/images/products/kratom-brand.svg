@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-labelledby="title desc">
-  <title id="title">Kratom product placeholder</title>
-  <desc id="desc">Generated neutral placeholder for future kratom product images.</desc>
+  <title id="title">Kratom retail graphic</title>
+  <desc id="desc">Clean branded retail graphic for kratom categories at Smoke Valley.</desc>
   <rect width="900" height="675" fill="#ffffff"/>
   <rect x="310" y="155" width="280" height="360" rx="42" fill="#f7f8f7" stroke="#d9dfdc" stroke-width="8"/>
   <path d="M450 255c72 12 112 66 72 138-70-10-118-58-72-138z" fill="#dff5eb" stroke="#166345" stroke-width="8"/>
   <path d="M450 255c-72 12-112 66-72 138 70-10 118-58 72-138z" fill="#dff5eb" stroke="#166345" stroke-width="8"/>
-  <text x="450" y="605" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#6b7773">Product image placeholder</text>
+  <text x="450" y="605" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#6b7773">Kratom products</text>
 </svg>

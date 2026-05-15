@@ -86,9 +86,18 @@ import { navigation } from '@data/navigation';
     closeIcon?.classList.toggle('hidden', !isOpen);
   };
 
-  button?.addEventListener('click', () => {
+  const toggleMenu = () => {
+    if (!button) return;
     const isOpen = button.getAttribute('aria-expanded') === 'true';
     setMenuOpen(!isOpen);
+  };
+
+  button?.addEventListener('click', toggleMenu);
+
+  button?.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    toggleMenu();
   });
 
   menu?.querySelectorAll('a').forEach((link) => {

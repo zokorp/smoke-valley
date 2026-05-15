@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-labelledby="title desc">
-  <title id="title">Rolling papers product placeholder</title>
-  <desc id="desc">Generated neutral placeholder for a future rolling papers product image.</desc>
+  <title id="title">Rolling papers retail graphic</title>
+  <desc id="desc">Clean branded retail graphic for rolling paper categories at Smoke Valley.</desc>
   <rect width="900" height="675" fill="#f7f8f7"/>
   <rect x="210" y="240" width="480" height="190" rx="26" fill="#ffffff" stroke="#d9dfdc" stroke-width="8"/>
   <rect x="250" y="285" width="400" height="40" rx="20" fill="#dff5eb"/>
   <rect x="250" y="350" width="300" height="34" rx="17" fill="#166345"/>
-  <text x="450" y="605" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#6b7773">Product image placeholder</text>
+  <text x="450" y="605" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#6b7773">Papers and accessories</text>
 </svg>

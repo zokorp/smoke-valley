@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Smoke Valley Smoke Shop</title>
+  <desc id="desc">Branded open graph image for Smoke Valley Smoke Shop in Richmond, Texas.</desc>
+  <rect width="1200" height="630" fill="#ffffff"/>
+  <rect x="64" y="64" width="1072" height="502" rx="36" fill="#f2fbf7" stroke="#d9dfdc" stroke-width="6"/>
+  <circle cx="184" cy="184" r="66" fill="#166345"/>
+  <text x="184" y="203" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="900" fill="#ffffff">SV</text>
+  <text x="284" y="184" font-family="Arial, sans-serif" font-size="74" font-weight="900" fill="#111817">Smoke Valley</text>
+  <text x="286" y="252" font-family="Arial, sans-serif" font-size="44" font-weight="800" fill="#166345">Smoke Valley Smoke Shop</text>
+  <text x="286" y="338" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#2f3b39">Richmond’s local stop for vapes, hookah, glass, accessories, CBD/Hemp, kratom, and more.</text>
+  <text x="286" y="430" font-family="Arial, sans-serif" font-size="28" font-weight="800" fill="#111817">1800 FM 359 Road, Richmond, TX 77406</text>
+  <text x="286" y="478" font-family="Arial, sans-serif" font-size="28" font-weight="800" fill="#111817">Call 832-295-3150</text>
+  <path d="M906 164c72 18 126 74 138 147 15 88-36 174-120 203-58 20-124 5-168-38 55 5 109-24 134-75 31-65 4-143-61-174-24-12-50-16-75-13 38-40 96-59 152-50z" fill="#dff5eb"/>
+  <path d="M870 254c43 13 74 50 78 94 5 59-39 111-98 116-38 3-74-14-96-43 36 6 72-15 84-50 13-40-8-83-48-97-14-5-29-6-43-3 30-20 70-27 123-17z" fill="#166345"/>
+</svg>

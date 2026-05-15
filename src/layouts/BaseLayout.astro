@@ -4,6 +4,7 @@ import Footer from '@components/Footer.astro';
 import Header from '@components/Header.astro';
 import Seo from '@components/Seo.astro';
 import WhatsAppButton from '@components/WhatsAppButton.astro';
+import { analytics } from '@data/analytics';
 import { getLocalBusinessSchema } from '@data/schema';
 import '@styles/global.css';
 
@@ -12,15 +13,19 @@ type Props = {
   description: string;
   path?: string;
   image?: string;
+  noindex?: boolean;
 };
 
-const { title, description, path, image } = Astro.props;
+const { title, description, path, image, noindex = false } = Astro.props;
+const cloudflareBeacon = analytics.cloudflareWebAnalyticsToken
+  ? JSON.stringify({ token: analytics.cloudflareWebAnalyticsToken })
+  : null;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <Seo title={title} description={description} path={path} image={image} jsonLd={getLocalBusinessSchema()} />
+    <Seo title={title} description={description} path={path} image={image} noindex={noindex} jsonLd={getLocalBusinessSchema()} />
     <script is:inline>
       (() => {
         const key = 'smoke-valley-age-verified';
@@ -38,6 +43,11 @@ const { title, description, path, image } = Astro.props;
         }
       })();
     </script>
+    {
+      cloudflareBeacon && (
+        <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={cloudflareBeacon}></script>
+      )
+    }
   </head>
   <body>
     <AgeGate />

@@ -2,7 +2,9 @@
 import { Mail, MapPin, Phone } from '@lucide/astro';
 import { business } from '@data/business';
 import { navigation } from '@data/navigation';
-import { socialLinks } from '@data/socials';
+import { socialLinks, type SocialLink } from '@data/socials';
+
+const liveSocialLinks = socialLinks.filter((social): social is SocialLink & { url: string } => Boolean(social.url));
 ---
 
 <footer class="border-t border-smoke-200 bg-charcoal-900 text-white">
@@ -56,17 +58,11 @@ import { socialLinks } from '@data/socials';
       </nav>
       <div class="mt-6 flex flex-wrap gap-2">
         {
-          socialLinks.map((social) =>
-            social.url ? (
-              <a class="rounded-full border border-white/20 px-3 py-1.5 text-sm font-bold text-smoke-100 hover:border-white hover:text-white" href={social.url} target="_blank" rel="noreferrer">
-                {social.label}
-              </a>
-            ) : (
-              <span class="rounded-full border border-white/10 px-3 py-1.5 text-sm font-bold text-smoke-300" title="Social URL placeholder">
-                {social.label}
-              </span>
-            ),
-          )
+          liveSocialLinks.map((social) => (
+            <a class="rounded-full border border-white/20 px-3 py-1.5 text-sm font-bold text-smoke-100 hover:border-white hover:text-white" href={social.url} target="_blank" rel="noreferrer">
+              {social.label}
+            </a>
+          ))
         }
       </div>
     </div>

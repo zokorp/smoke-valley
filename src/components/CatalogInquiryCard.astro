@@ -1,0 +1,48 @@
+---
+import { MessageCircle, Phone } from '@lucide/astro';
+import { business } from '@data/business';
+import type { CatalogInquiry } from '@data/catalogInquiries';
+
+type Props = {
+  inquiry: CatalogInquiry;
+};
+
+const { inquiry } = Astro.props;
+const searchText = [inquiry.title, inquiry.type, inquiry.category, inquiry.brand, inquiry.description, ...inquiry.tags]
+  .join(' ')
+  .toLowerCase();
+---
+
+<article
+  class="catalog-card card flex h-full flex-col overflow-hidden"
+  data-catalog-card
+  data-search={searchText}
+  data-category={inquiry.category}
+  data-brand={inquiry.brand}
+>
+  <div class="media-frame aspect-[4/3] rounded-none border-0 border-b border-smoke-200">
+    <img class="h-full w-full object-cover" src={inquiry.image} alt={`${inquiry.title} retail graphic`} loading="lazy" />
+  </div>
+  <div class="flex flex-1 flex-col p-5">
+    <div class="flex flex-wrap gap-2">
+      <span class="rounded-full bg-valley-50 px-3 py-1 text-xs font-black text-valley-700">{inquiry.type}</span>
+      <span class="rounded-full bg-smoke-50 px-3 py-1 text-xs font-black text-charcoal-700">{inquiry.brand}</span>
+    </div>
+    <h2 class="mt-4 text-xl font-black leading-tight text-charcoal-900">{inquiry.title}</h2>
+    <p class="mt-3 text-sm leading-6 text-charcoal-700">{inquiry.description}</p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      {inquiry.tags.map((tag) => <span class="rounded-full border border-smoke-200 px-2.5 py-1 text-xs font-bold text-smoke-500">#{tag}</span>)}
+    </div>
+    <p class="mt-4 text-sm font-bold text-smoke-500">Selection may vary. Call or message the store for current availability.</p>
+    <div class="mt-auto grid gap-2 pt-5">
+      <a class="button-primary" href={business.phoneHref}>
+        <Phone size={18} aria-hidden="true" />
+        Call Store
+      </a>
+      <a class="button-secondary" href={business.whatsappHref} target="_blank" rel="noreferrer">
+        <MessageCircle size={18} aria-hidden="true" />
+        WhatsApp Store
+      </a>
+    </div>
+  </div>
+</article>

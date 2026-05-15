@@ -1,6 +1,6 @@
 # Shopify Migration Plan
 
-The current Smoke Valley website is a static Phase 1 catalog and local-business website. It does not include Shopify, online checkout, prices, inventory status, shipping, pickup reservations, customer accounts, or payment processing.
+The current Smoke Valley website is a static public launch site with an inquiry-based catalog and local-business pages. It does not include Shopify, online checkout, prices, inventory status, shipping, pickup reservations, customer accounts, or payment processing.
 
 ## Why The Current Product Schema Includes Shopify Fields
 
@@ -23,7 +23,7 @@ Product entries in `src/data/products.ts` include fields such as:
 
 These fields are intentionally present so the catalog can later migrate or sync to Shopify without rebuilding the site structure from scratch.
 
-For Phase 1, commerce-related fields should stay disabled:
+For the current static launch, commerce-related fields should stay disabled:
 
 - `price` should usually be `null`
 - `showPrice` should be `false`
@@ -47,7 +47,7 @@ For Phase 1, commerce-related fields should stay disabled:
 
 Start with in-store pickup or reservation workflows before shipping. Shipping adult-restricted products can add compliance, carrier, age verification, payment processor, and local-law complexity.
 
-## Do Not Implement In Phase 1
+## Do Not Implement In The Current Static Launch
 
 - Do not add Shopify scripts or buy buttons yet.
 - Do not add online checkout yet.

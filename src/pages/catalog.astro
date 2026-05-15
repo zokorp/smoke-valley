@@ -1,11 +1,11 @@
 ---
-import ProductCard from '@components/ProductCard.astro';
+import CatalogInquiryCard from '@components/CatalogInquiryCard.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { business } from '@data/business';
+import { catalogInquiries } from '@data/catalogInquiries';
 import { categories } from '@data/categories';
-import { products } from '@data/products';
 
-const brands = [...new Set(products.map((product) => product.brand))].sort();
+const brands = [...new Set(catalogInquiries.map((item) => item.brand))].sort();
 ---
 
 <BaseLayout
@@ -18,7 +18,7 @@ const brands = [...new Set(products.map((product) => product.brand))].sort();
       <div class="section-heading">
         <h1 class="text-5xl md:text-6xl">Product catalog</h1>
         <p>
-          Browse sample catalog categories and product cards. Prices, inventory, checkout, and online ordering are intentionally not enabled for Phase 1.
+          Browse categories and featured brands, then call or message Smoke Valley to ask about current selection. Prices, inventory, checkout, and online ordering are intentionally not enabled online.
         </p>
       </div>
 
@@ -29,7 +29,6 @@ const brands = [...new Set(products.map((product) => product.brand))].sort();
             class="min-h-12 rounded-xl border border-smoke-200 bg-white px-4 text-base"
             id="catalog-search"
             type="search"
-            placeholder="Search product, brand, category, or tag"
           />
         </label>
         <label class="grid gap-2">
@@ -52,16 +51,16 @@ const brands = [...new Set(products.map((product) => product.brand))].sort();
       </form>
 
       <div class="mt-5 flex flex-col gap-3 text-sm font-bold text-smoke-500 sm:flex-row sm:items-center sm:justify-between">
-        <p id="catalog-results-count" aria-live="polite">{products.length} sample products shown</p>
-        <p>Selection may vary. Call store for current availability.</p>
+        <p id="catalog-results-count" aria-live="polite">{catalogInquiries.length} inquiry topics shown</p>
+        <p>Selection may vary. Call or message the store for current availability.</p>
       </div>
 
       <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3" id="product-grid">
-        {products.map((product) => <ProductCard product={product} />)}
+        {catalogInquiries.map((inquiry) => <CatalogInquiryCard inquiry={inquiry} />)}
       </div>
 
       <div class="empty-state mt-8 rounded-2xl border border-smoke-200 bg-smoke-50 p-8 text-center" id="catalog-empty" hidden>
-        <h2 class="text-2xl font-black text-charcoal-900">No matching products</h2>
+        <h2 class="text-2xl font-black text-charcoal-900">No matching topics</h2>
         <p class="mt-2 text-sm font-bold text-smoke-500">Try clearing filters, or call Smoke Valley to ask about what you need.</p>
         <a class="button-primary mt-5" href={business.phoneHref}>Call Store</a>
       </div>
@@ -74,7 +73,7 @@ const brands = [...new Set(products.map((product) => product.brand))].sort();
   const categoryFilter = document.getElementById('category-filter') as HTMLSelectElement | null;
   const brandFilter = document.getElementById('brand-filter') as HTMLSelectElement | null;
   const clearButton = document.getElementById('clear-filters') as HTMLButtonElement | null;
-  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-product-card]'));
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-catalog-card]'));
   const count = document.getElementById('catalog-results-count');
   const empty = document.getElementById('catalog-empty');
 
@@ -94,7 +93,7 @@ const brands = [...new Set(products.map((product) => product.brand))].sort();
       if (shouldShow) visible += 1;
     });
 
-    if (count) count.textContent = `${visible} sample product${visible === 1 ? '' : 's'} shown`;
+    if (count) count.textContent = `${visible} inquiry topic${visible === 1 ? '' : 's'} shown`;
     if (empty) empty.hidden = visible !== 0;
   };
 
@@ -106,7 +105,9 @@ const brands = [...new Set(products.map((product) => product.brand))].sort();
 
   searchInput?.addEventListener('input', applyFilters);
   categoryFilter?.addEventListener('change', applyFilters);
+  categoryFilter?.addEventListener('input', applyFilters);
   brandFilter?.addEventListener('change', applyFilters);
+  brandFilter?.addEventListener('input', applyFilters);
   clearButton?.addEventListener('click', () => {
     if (searchInput) searchInput.value = '';
     if (categoryFilter) categoryFilter.value = '';

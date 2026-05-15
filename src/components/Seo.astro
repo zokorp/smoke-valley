@@ -7,14 +7,16 @@ type Props = {
   path?: string;
   image?: string;
   jsonLd?: unknown;
+  noindex?: boolean;
 };
 
 const {
   title,
   description,
   path = Astro.url.pathname,
-  image = '/images/store/storefront-placeholder.svg',
+  image = '/images/brands/og-smoke-valley.svg',
   jsonLd,
+  noindex = false,
 } = Astro.props;
 
 const canonicalUrl = new URL(path, business.siteUrl).toString();
@@ -26,6 +28,7 @@ const imageUrl = new URL(image, business.siteUrl).toString();
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
 <meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
 <link rel="canonical" href={canonicalUrl} />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 

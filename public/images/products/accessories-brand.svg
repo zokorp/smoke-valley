@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-labelledby="title desc">
-  <title id="title">Accessories product placeholder</title>
-  <desc id="desc">Generated neutral placeholder for a future accessories product image.</desc>
+  <title id="title">Accessories retail graphic</title>
+  <desc id="desc">Clean branded retail graphic for accessories at Smoke Valley.</desc>
   <rect width="900" height="675" fill="#ffffff"/>
   <rect x="255" y="190" width="150" height="240" rx="30" fill="#dff5eb" stroke="#d9dfdc" stroke-width="8"/>
   <rect x="455" y="150" width="190" height="320" rx="32" fill="#f7f8f7" stroke="#d9dfdc" stroke-width="8"/>
   <path d="M300 490h300" stroke="#166345" stroke-width="20" stroke-linecap="round"/>
-  <text x="450" y="605" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#6b7773">Product image placeholder</text>
+  <text x="450" y="605" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#6b7773">Accessories</text>
 </svg>

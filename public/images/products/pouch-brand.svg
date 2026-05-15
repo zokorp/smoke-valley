@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-labelledby="title desc">
-  <title id="title">Nicotine pouch product placeholder</title>
-  <desc id="desc">Generated neutral placeholder for a future nicotine pouch product image.</desc>
+  <title id="title">Nicotine pouch retail graphic</title>
+  <desc id="desc">Clean branded retail graphic for nicotine pouch categories at Smoke Valley.</desc>
   <rect width="900" height="675" fill="#f2fbf7"/>
   <circle cx="450" cy="320" r="170" fill="#ffffff" stroke="#d9dfdc" stroke-width="8"/>
   <circle cx="450" cy="320" r="100" fill="#dff5eb"/>
   <rect x="372" y="302" width="156" height="36" rx="18" fill="#166345"/>
-  <text x="450" y="605" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#6b7773">Product image placeholder</text>
+  <text x="450" y="605" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#6b7773">Adult nicotine products</text>
 </svg>

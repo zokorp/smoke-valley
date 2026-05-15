@@ -3,28 +3,28 @@ import { business } from './business';
 export type SocialLink = {
   label: string;
   url: string | null;
-  placeholder: boolean;
+  hiddenUntilReady: boolean;
 };
 
 export const socialLinks: SocialLink[] = [
   {
     label: 'Instagram',
     url: null,
-    placeholder: true,
+    hiddenUntilReady: true,
   },
   {
     label: 'Facebook',
     url: null,
-    placeholder: true,
+    hiddenUntilReady: true,
   },
   {
     label: 'Yelp',
     url: null,
-    placeholder: true,
+    hiddenUntilReady: true,
   },
   {
     label: 'Google Business',
     url: business.reviewUrl,
-    placeholder: false,
+    hiddenUntilReady: false,
   },
 ];
