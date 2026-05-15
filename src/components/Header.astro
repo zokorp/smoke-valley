@@ -1,55 +1,41 @@
 ---
-import { Menu, MapPin, Phone, X } from '@lucide/astro';
-import { business } from '@data/business';
+import { Menu, Search, UserRound, X } from '@lucide/astro';
 import { navigation } from '@data/navigation';
+import { rewards } from '@data/rewards';
+
+const accountTarget = rewards.signupHref;
 ---
 
 <header class="site-header">
-  <div class="container-padded flex min-h-20 items-center justify-between gap-4">
-    <a href="/" class="flex items-center gap-3 no-underline" aria-label="Smoke Valley home">
-      <span class="grid h-11 w-11 place-items-center rounded-full bg-valley-700 text-sm font-black text-white">SV</span>
-      <span class="leading-tight">
-        <span class="block text-base font-black text-charcoal-900">Smoke Valley</span>
-        <span class="block text-sm font-bold text-smoke-500">Richmond, TX</span>
-      </span>
-    </a>
-
-    <nav class="hidden items-center gap-1 md:flex" aria-label="Primary navigation">
-      {
-        navigation.map((item) => (
-          <a class="rounded-full px-3 py-2 text-sm font-extrabold text-charcoal-700 hover:bg-smoke-50 hover:text-valley-700" href={item.href}>
-            {item.label}
-          </a>
-        ))
-      }
-    </nav>
-
-    <div class="hidden items-center gap-2 md:flex">
-      <a class="button-secondary" href={business.directionsUrl} target="_blank" rel="noreferrer">
-        <MapPin size={18} aria-hidden="true" />
-        Directions
-      </a>
-      <a class="button-primary" href={business.phoneHref}>
-        <Phone size={18} aria-hidden="true" />
-        Call Store
+  <div class="container-padded grid min-h-16 grid-cols-[auto_1fr_auto] items-center gap-4">
+    <div class="flex items-center gap-2">
+      <button
+        class="icon-button"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-controls="site-menu"
+        aria-expanded="false"
+        data-store-menu-button
+      >
+        <Menu size={22} data-store-menu-open-icon aria-hidden="true" />
+        <X size={22} data-store-menu-close-icon aria-hidden="true" class="hidden" />
+      </button>
+      <a class="icon-button" href="/products/?focusSearch=1" aria-label="Search products">
+        <Search size={21} aria-hidden="true" />
       </a>
     </div>
 
-    <button
-      class="inline-grid h-11 w-11 place-items-center rounded-full border border-smoke-200 bg-white text-charcoal-900 md:hidden"
-      type="button"
-      aria-label="Open navigation menu"
-      aria-controls="mobile-menu"
-      aria-expanded="false"
-      data-store-menu-button
-    >
-      <Menu size={22} data-store-menu-open-icon aria-hidden="true" />
-      <X size={22} data-store-menu-close-icon aria-hidden="true" class="hidden" />
-    </button>
+    <a href="/" class="site-wordmark justify-self-center text-center text-xl font-black tracking-[0.08em] text-charcoal-900 uppercase no-underline" aria-label="Smoke Valley home">
+      Smoke Valley
+    </a>
+
+    <a class="icon-button justify-self-end" href={accountTarget} target="_blank" rel="noreferrer" aria-label="Join rewards">
+      <UserRound size={21} aria-hidden="true" />
+    </a>
   </div>
 
-  <div class="mobile-menu border-t border-smoke-200 bg-white md:hidden" id="mobile-menu" hidden>
-    <nav class="container-padded grid gap-2 py-4" aria-label="Mobile navigation">
+  <div class="mobile-menu border-t border-smoke-200 bg-white" id="site-menu" hidden>
+    <nav class="container-padded grid gap-2 py-4" aria-label="Primary navigation">
       {
         navigation.map((item) => (
           <a class="rounded-xl px-3 py-3 text-base font-extrabold text-charcoal-900 hover:bg-smoke-50" href={item.href}>
@@ -57,23 +43,14 @@ import { navigation } from '@data/navigation';
           </a>
         ))
       }
-      <div class="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
-        <a class="button-secondary" href={business.directionsUrl} target="_blank" rel="noreferrer">
-          <MapPin size={18} aria-hidden="true" />
-          Get Directions
-        </a>
-        <a class="button-primary" href={business.phoneHref}>
-          <Phone size={18} aria-hidden="true" />
-          Call Store
-        </a>
-      </div>
+      <a class="button-primary mt-2" href={accountTarget} target="_blank" rel="noreferrer">Join Rewards</a>
     </nav>
   </div>
 </header>
 
 <script>
   const button = document.querySelector('[data-store-menu-button]') as HTMLButtonElement | null;
-  const menu = document.getElementById('mobile-menu');
+  const menu = document.getElementById('site-menu');
   const openIcon = document.querySelector('[data-store-menu-open-icon]');
   const closeIcon = document.querySelector('[data-store-menu-close-icon]');
 

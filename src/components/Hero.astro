@@ -1,87 +1,80 @@
 ---
-import { MapPin, MessageCircle, Phone, Star } from '@lucide/astro';
+import { MapPin, Phone } from '@lucide/astro';
+import MapEmbed from '@components/MapEmbed.astro';
 import { business } from '@data/business';
-
-const slides = [
-  {
-    src: '/images/store/storefront-brand.svg',
-    alt: 'Smoke Valley retail brand graphic',
-  },
-  {
-    src: '/images/store/interior-brand.svg',
-    alt: 'Smoke Valley store interior brand graphic',
-  },
-  {
-    src: '/images/store/display-wall-brand.svg',
-    alt: 'Smoke Valley product display brand graphic',
-  },
-];
 ---
 
-<section class="overflow-hidden bg-white">
-  <div class="container-padded grid gap-8 py-7 lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:gap-10 lg:py-14">
-    <div class="section-heading">
-      <h1 class="text-[clamp(2.35rem,10vw,5.2rem)]">Smoke Valley Smoke Shop</h1>
-      <p class="max-w-2xl text-lg">{business.tagline}</p>
-      <div class="mt-5 grid gap-2 text-sm font-bold text-charcoal-700 min-[360px]:grid-cols-2 sm:gap-3">
-        <p class="flex items-center gap-2 rounded-2xl bg-smoke-50 p-3">
-          <MapPin size={18} class="text-valley-700" aria-hidden="true" />
-          {business.formattedAddress}
-        </p>
-        <p class="rounded-2xl bg-smoke-50 p-3">Mon-Sat 10 AM-10 PM | Sun 10 AM-7 PM</p>
-      </div>
-      <div class="mt-5 flex flex-wrap gap-3">
-        <a class="button-primary" href={business.phoneHref}>
-          <Phone size={18} aria-hidden="true" />
-          Call Store
-        </a>
-        <a class="button-secondary" href={business.whatsappHref} target="_blank" rel="noreferrer">
-          <MessageCircle size={18} aria-hidden="true" />
-          WhatsApp Store
-        </a>
-        <a class="button-secondary" href={business.directionsUrl} target="_blank" rel="noreferrer">
-          <MapPin size={18} aria-hidden="true" />
-          Get Directions
-        </a>
-      </div>
-    </div>
+<section class="home-hero">
+  <div class="home-hero__background" aria-hidden="true">
+    <img src="/images/store/product-wall-brand.svg" alt="" loading="eager" />
+  </div>
 
-    <div class="relative">
-      <div class="media-frame relative aspect-[16/8] shadow-[var(--shadow-soft)] sm:aspect-[5/4] lg:aspect-[4/5]">
-        {
-          slides.map((slide, index) => (
-            <div class:list={['hero-slide', { 'is-active': index === 0 }]} data-hero-slide>
-              <img src={slide.src} alt={slide.alt} loading={index === 0 ? 'eager' : 'lazy'} />
-            </div>
-          ))
-        }
+  <div class="container-padded relative z-10 py-8 md:py-12">
+    <div class="home-hero__content">
+      <div class="grid gap-2">
+        <h1 class="text-3xl font-black tracking-[0.08em] text-charcoal-900 uppercase md:text-4xl">Smoke Valley</h1>
+        <a class="inline-flex items-start gap-2 text-sm font-bold leading-6 text-charcoal-700" href={business.directionsUrl} target="_blank" rel="noreferrer">
+          <MapPin class="mt-0.5 shrink-0 text-valley-700" size={17} aria-hidden="true" />
+          {business.formattedAddress}
+        </a>
+        <a class="inline-flex items-center gap-2 text-sm font-black text-charcoal-900" href={business.phoneHref}>
+          <Phone class="text-valley-700" size={17} aria-hidden="true" />
+          {business.phoneDisplay}
+        </a>
       </div>
-      <a
-        class="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-4 rounded-2xl border border-white/70 bg-white/90 p-4 shadow-lg backdrop-blur"
-        href={business.reviewUrl}
-        target="_blank"
-        rel="noreferrer"
-      >
-        <span>
-          <span class="block text-sm font-black text-charcoal-900">Had a good visit?</span>
-          <span class="block text-sm font-bold text-smoke-500">Leave us a Google review.</span>
-        </span>
-        <Star size={22} class="shrink-0 text-valley-700" aria-hidden="true" />
-      </a>
+
+      <div class="mt-5 rounded-2xl border border-smoke-200 bg-white/90 p-4 shadow-sm">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <h2 class="text-sm font-black uppercase tracking-[0.16em] text-smoke-500">Hours</h2>
+            <div class="mt-2 grid gap-1 text-sm font-bold text-charcoal-700">
+              {business.hours.map((hour) => <p><span class="text-charcoal-900">{hour.label}:</span> {hour.display}</p>)}
+            </div>
+          </div>
+          <p class="store-status" data-store-open-status>Checking hours...</p>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <MapEmbed />
+      </div>
     </div>
   </div>
 </section>
 
 <script>
-  const slides = Array.from(document.querySelectorAll('[data-hero-slide]'));
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let activeSlide = 0;
+  const statusElement = document.querySelector<HTMLElement>('[data-store-open-status]');
 
-  if (slides.length > 1 && !reduceMotion) {
-    window.setInterval(() => {
-      slides[activeSlide]?.classList.remove('is-active');
-      activeSlide = (activeSlide + 1) % slides.length;
-      slides[activeSlide]?.classList.add('is-active');
-    }, 4500);
-  }
+  const getCentralTimeParts = () => {
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/Chicago',
+      weekday: 'short',
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h23',
+    });
+    const parts = formatter.formatToParts(new Date());
+    const value = (type: string) => parts.find((part) => part.type === type)?.value ?? '';
+
+    return {
+      weekday: value('weekday'),
+      hour: Number(value('hour')),
+      minute: Number(value('minute')),
+    };
+  };
+
+  const updateStoreStatus = () => {
+    if (!statusElement) return;
+    const { weekday, hour, minute } = getCentralTimeParts();
+    const currentMinutes = hour * 60 + minute;
+    const openMinutes = 10 * 60;
+    const closeMinutes = weekday === 'Sun' ? 19 * 60 : 22 * 60;
+    const isOpen = currentMinutes >= openMinutes && currentMinutes < closeMinutes;
+
+    statusElement.textContent = isOpen ? 'Open now' : 'Closed';
+    statusElement.dataset.open = String(isOpen);
+  };
+
+  updateStoreStatus();
+  window.setInterval(updateStoreStatus, 60 * 1000);
 </script>

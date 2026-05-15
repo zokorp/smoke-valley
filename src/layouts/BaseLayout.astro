@@ -2,6 +2,7 @@
 import AgeGate from '@components/AgeGate.astro';
 import Footer from '@components/Footer.astro';
 import Header from '@components/Header.astro';
+import RewardsPopup from '@components/RewardsPopup.astro';
 import Seo from '@components/Seo.astro';
 import WhatsAppButton from '@components/WhatsAppButton.astro';
 import { analytics } from '@data/analytics';
@@ -58,6 +59,7 @@ const cloudflareBeacon = analytics.cloudflareWebAnalyticsToken
         <slot />
       </main>
       <Footer />
+      <RewardsPopup />
       <WhatsAppButton />
     </div>
   </body>

@@ -257,8 +257,184 @@ html[data-age-verified="true"] .age-gate {
   backdrop-filter: blur(16px);
 }
 
+.icon-button {
+  display: inline-grid;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  place-items: center;
+  border: 1px solid #d9dfdc;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #111817;
+  text-decoration: none;
+  transition:
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.icon-button:hover {
+  border-color: #166345;
+  color: #166345;
+  transform: translateY(-1px);
+}
+
 .mobile-menu[hidden] {
   display: none;
+}
+
+.home-hero,
+.products-hero {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.home-hero__background,
+.products-hero__background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.home-hero__background::after,
+.products-hero__background::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    linear-gradient(90deg, rgb(255 255 255 / 0.96), rgb(255 255 255 / 0.84) 48%, rgb(255 255 255 / 0.52)),
+    linear-gradient(180deg, rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.96));
+}
+
+.home-hero__background img,
+.products-hero__background img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.home-hero__content {
+  max-width: 52rem;
+}
+
+.products-hero__copy {
+  width: min(100%, 48rem);
+  border-radius: 1.25rem;
+  background: rgb(255 255 255 / 0.86);
+  padding: clamp(1.25rem, 4vw, 2rem);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(10px);
+}
+
+.store-status {
+  align-self: flex-start;
+  border-radius: 999px;
+  background: #f7f8f7;
+  padding: 0.55rem 0.85rem;
+  color: #6b7773;
+  font-size: 0.85rem;
+  font-weight: 900;
+}
+
+.store-status[data-open="true"] {
+  background: #dff5eb;
+  color: #0d3c2b;
+}
+
+.brand-tile-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.brand-tile {
+  min-height: 7rem;
+  border: 1px solid color-mix(in srgb, var(--brand-accent) 30%, #d9dfdc);
+  border-radius: 1rem;
+  background: var(--brand-bg);
+  color: var(--brand-text);
+  padding: 1rem;
+  box-shadow: var(--shadow-card);
+}
+
+.brand-tile__name,
+.brand-tile__category {
+  display: block;
+}
+
+.brand-tile__name {
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 950;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.brand-tile__category {
+  margin-top: 0.7rem;
+  color: var(--brand-accent);
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.filter-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgb(17 24 23 / 0.38);
+}
+
+.filter-drawer {
+  position: fixed;
+  inset-block: 0;
+  right: 0;
+  z-index: 70;
+  width: min(100%, 25rem);
+  overflow-y: auto;
+  border-left: 1px solid #d9dfdc;
+  background: #ffffff;
+  box-shadow: -20px 0 50px rgb(17 24 23 / 0.18);
+}
+
+.filter-drawer-open body {
+  overflow: hidden;
+}
+
+.rewards-popup {
+  position: fixed;
+  right: 1rem;
+  bottom: 5.5rem;
+  z-index: 80;
+  width: min(calc(100% - 2rem), 24rem);
+}
+
+.rewards-popup[hidden] {
+  display: none;
+}
+
+.rewards-popup__panel {
+  position: relative;
+  border: 1px solid #d9dfdc;
+  border-radius: 1.25rem;
+  background: rgb(255 255 255 / 0.98);
+  padding: 1.25rem;
+  box-shadow: 0 24px 70px rgb(17 24 23 / 0.18);
+}
+
+.rewards-popup__close {
+  position: absolute;
+  right: 0.8rem;
+  top: 0.8rem;
+  display: inline-grid;
+  height: 2rem;
+  width: 2rem;
+  place-items: center;
+  border: 1px solid #d9dfdc;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #111817;
 }
 
 .hero-slide {
@@ -283,11 +459,23 @@ html[data-age-verified="true"] .age-gate {
   display: none;
 }
 
+.catalog-card__action {
+  min-height: 2.35rem;
+  padding: 0.6rem 0.65rem;
+  font-size: 0.78rem;
+}
+
 .map-embed {
   aspect-ratio: 16 / 11;
   min-height: 18rem;
   width: 100%;
   border: 0;
+}
+
+@media (min-width: 48rem) {
+  .brand-tile-row {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

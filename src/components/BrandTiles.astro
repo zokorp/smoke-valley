@@ -1,0 +1,14 @@
+---
+import { featuredBrandTiles } from '@data/brands';
+---
+
+<div class="brand-tile-row">
+  {
+    featuredBrandTiles.map((brand) => (
+      <div class="brand-tile" style={brand.style}>
+        <span class="brand-tile__name">{brand.name}</span>
+        <span class="brand-tile__category">{brand.category}</span>
+      </div>
+    ))
+  }
+</div>

@@ -1,0 +1,3 @@
+/catalog /products/ 301
+/catalog/ /products/ 301
+/catalog/* /products/:splat 301

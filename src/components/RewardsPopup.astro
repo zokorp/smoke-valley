@@ -1,0 +1,76 @@
+---
+import { X } from '@lucide/astro';
+import { rewards } from '@data/rewards';
+---
+
+<div
+  class="rewards-popup"
+  data-rewards-popup
+  data-dismiss-hours={rewards.popupDismissHours}
+  hidden
+  role="dialog"
+  aria-modal="false"
+  aria-labelledby="rewards-popup-title"
+>
+  <div class="rewards-popup__panel">
+    <button class="rewards-popup__close" type="button" aria-label="Close rewards message" data-rewards-popup-close>
+      <X size={18} aria-hidden="true" />
+    </button>
+    <p class="text-xs font-black uppercase tracking-[0.16em] text-valley-700">Rewards</p>
+    <h2 id="rewards-popup-title" class="mt-2 text-xl font-black text-charcoal-900">Join Smoke Valley rewards</h2>
+    <p class="mt-2 text-sm leading-6 text-smoke-500">{rewards.popupMessage}</p>
+    <a class="button-primary mt-4 w-full" href={rewards.signupHref} target="_blank" rel="noreferrer">Join Rewards</a>
+  </div>
+</div>
+
+<script>
+  const popup = document.querySelector<HTMLElement>('[data-rewards-popup]');
+  const closeButton = document.querySelector<HTMLButtonElement>('[data-rewards-popup-close]');
+  const dismissKey = 'smoke-valley-rewards-popup-dismissed-at';
+  const dismissHours = Number(popup?.dataset.dismissHours ?? '24');
+  const dismissMs = dismissHours * 60 * 60 * 1000;
+
+  const getDismissedAt = () => {
+    try {
+      return Number(window.localStorage.getItem(dismissKey) ?? '0');
+    } catch {
+      return 0;
+    }
+  };
+
+  const dismissPopup = () => {
+    if (!popup) return;
+    popup.hidden = true;
+    try {
+      window.localStorage.setItem(dismissKey, String(Date.now()));
+    } catch {
+      // The popup can still be dismissed for the current page when localStorage is unavailable.
+    }
+  };
+
+  const showRewardsPopup = () => {
+    if (!popup) return;
+    const isVerified = document.documentElement.dataset.ageVerified === 'true';
+    const dismissedAt = getDismissedAt();
+    const shouldStayDismissed = dismissedAt > 0 && Date.now() - dismissedAt < dismissMs;
+
+    if (isVerified && !shouldStayDismissed) {
+      popup.hidden = false;
+    }
+  };
+
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('resetRewardsPopup') === '1') {
+      window.localStorage.removeItem(dismissKey);
+    }
+  } catch {
+    // Ignore storage reset failures.
+  }
+
+  closeButton?.addEventListener('click', dismissPopup);
+
+  const ageObserver = new MutationObserver(showRewardsPopup);
+  ageObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-age-verified'] });
+  window.setTimeout(showRewardsPopup, 400);
+</script>

@@ -1,12 +1,10 @@
 ---
 import CategoryCard from '@components/CategoryCard.astro';
+import BrandTiles from '@components/BrandTiles.astro';
 import Hero from '@components/Hero.astro';
-import MapEmbed from '@components/MapEmbed.astro';
-import StoreHours from '@components/StoreHours.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { business } from '@data/business';
 import { categories } from '@data/categories';
-import { featuredBrands } from '@data/products';
 ---
 
 <BaseLayout
@@ -28,52 +26,26 @@ import { featuredBrands } from '@data/products';
   </section>
 
   <section class="section-pad bg-white">
-    <div class="container-padded grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-start">
-      <div>
-        <div class="section-heading">
-          <h2 class="text-4xl md:text-5xl">Featured brands</h2>
-          <p>Ask staff about current selections from popular brands. This website does not guarantee stock or availability.</p>
-        </div>
-        <div class="mt-8 grid gap-3 sm:grid-cols-2">
-          {
-            featuredBrands.map((brand) => (
-              <div class="rounded-2xl border border-smoke-200 bg-smoke-50 p-5">
-                <p class="text-2xl font-black text-charcoal-900">{brand}</p>
-                <p class="mt-2 text-sm font-bold text-smoke-500">Call or visit for current options.</p>
-              </div>
-            ))
-          }
-        </div>
+    <div class="container-padded">
+      <div class="section-heading">
+        <h2 class="text-4xl md:text-5xl">Featured brands</h2>
+        <p>Ask staff about current selections from popular brands. This website does not guarantee stock or availability.</p>
       </div>
-      <div class="grid gap-5">
-        <StoreHours />
-        <div class="card p-6">
-          <h2 class="text-2xl font-black text-charcoal-900">Rewards available in-store</h2>
-          <p class="mt-3 leading-7 text-smoke-500">
-            Join by phone number at checkout. Ask Smoke Valley staff about current rewards, promotions, and updates.
-          </p>
-          <div class="mt-5 flex flex-col gap-3 sm:flex-row">
-            <a class="button-primary" href={business.directionsUrl} target="_blank" rel="noreferrer">Visit us in store</a>
-            <a class="button-secondary" href={business.phoneHref}>Call Store</a>
-          </div>
-        </div>
+      <div class="mt-8">
+        <BrandTiles />
       </div>
     </div>
   </section>
 
   <section class="section-pad retail-band">
-    <div class="container-padded grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+    <div class="container-padded">
       <div class="section-heading">
-        <h2 class="text-4xl md:text-5xl">Find us in Richmond</h2>
-        <p>
-          Stop by Smoke Valley at {business.formattedAddress}. Use the map or directions button to open Google Maps.
-        </p>
+        <h2 class="text-4xl md:text-5xl">Had a good visit?</h2>
+        <p>Leave Smoke Valley a Google review and help local customers find us.</p>
         <div class="mt-6 flex flex-col gap-3 sm:flex-row">
-          <a class="button-primary" href={business.directionsUrl} target="_blank" rel="noreferrer">Get Directions</a>
-          <a class="button-secondary" href={business.reviewUrl} target="_blank" rel="noreferrer">Leave us a Google review</a>
+          <a class="button-primary" href={business.reviewUrl} target="_blank" rel="noreferrer">Leave us a Google review</a>
         </div>
       </div>
-      <MapEmbed />
     </div>
   </section>
 </BaseLayout>

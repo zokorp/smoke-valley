@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" role="img" aria-labelledby="title desc">
+  <title id="title">Smoke Valley featured brands graphic</title>
+  <desc id="desc">Stylized featured brand wall for Smoke Valley products.</desc>
+  <rect width="1600" height="700" fill="#f2fbf7"/>
+  <path d="M0 0h1600v700H0z" fill="url(#bg)"/>
+  <g opacity=".92">
+    <rect x="120" y="120" width="270" height="180" rx="34" fill="#111817"/>
+    <rect x="430" y="120" width="270" height="180" rx="34" fill="#fff7f2"/>
+    <rect x="740" y="120" width="270" height="180" rx="34" fill="#f4f7ff"/>
+    <rect x="1050" y="120" width="270" height="180" rx="34" fill="#ffffff"/>
+    <rect x="275" y="340" width="270" height="180" rx="34" fill="#ffffff"/>
+    <rect x="585" y="340" width="270" height="180" rx="34" fill="#111817"/>
+    <rect x="895" y="340" width="270" height="180" rx="34" fill="#f2fbf7"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-weight="900" text-anchor="middle">
+    <text x="255" y="226" font-size="42" fill="#ffffff">GEEK BAR</text>
+    <text x="565" y="226" font-size="40" fill="#111817">LOST MARY</text>
+    <text x="875" y="226" font-size="44" fill="#16213f">FOGGER</text>
+    <text x="1185" y="226" font-size="38" fill="#0d3c2b">GEEK VAPE</text>
+    <text x="410" y="446" font-size="44" fill="#0d3c2b">VAPES</text>
+    <text x="720" y="446" font-size="48" fill="#ffffff">SMOK</text>
+    <text x="1030" y="446" font-size="38" fill="#166345">ACCESSORIES</text>
+  </g>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".5" stop-color="#f2fbf7"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+</svg>

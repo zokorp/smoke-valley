@@ -1,6 +1,6 @@
 # Shopify Migration Plan
 
-The current Smoke Valley website is a static public launch site with an inquiry-based catalog and local-business pages. It does not include Shopify, online checkout, prices, inventory status, shipping, pickup reservations, customer accounts, or payment processing.
+The current Smoke Valley website is a static public launch site with an inquiry-based Products page and local-business pages. It does not include Shopify, online checkout, prices, inventory status, shipping, pickup reservations, customer accounts, or payment processing.
 
 ## Why The Current Product Schema Includes Shopify Fields
 
@@ -21,7 +21,7 @@ Product entries in `src/data/products.ts` include fields such as:
 - `pickupOnly`
 - `shippingEligible`
 
-These fields are intentionally present so the catalog can later migrate or sync to Shopify without rebuilding the site structure from scratch.
+These fields are intentionally present so product data can later migrate or sync to Shopify without rebuilding the site structure from scratch.
 
 For the current static launch, commerce-related fields should stay disabled:
 
@@ -40,7 +40,7 @@ For the current static launch, commerce-related fields should stay disabled:
 4. Configure a Shopify-compatible age verification app or service.
 5. Configure pickup and shipping rules.
 6. Add adult-signature and ID-verification workflow if shipping is ever enabled.
-7. Import the product catalog from the static data source.
+7. Import the product list from the static data source.
 8. Replace catalog CTAs with Shopify product links, pickup/reservation links, or embedded buy buttons only after compliance and payment setup are complete.
 
 ## Strong Recommendation

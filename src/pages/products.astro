@@ -1,0 +1,177 @@
+---
+import { SlidersHorizontal, X } from '@lucide/astro';
+import CatalogInquiryCard from '@components/CatalogInquiryCard.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { business } from '@data/business';
+import { catalogInquiries, newArrivalInquiries } from '@data/catalogInquiries';
+import { categories } from '@data/categories';
+
+const brands = [...new Set(catalogInquiries.map((item) => item.brand))].sort();
+const standardInquiries = catalogInquiries.filter((inquiry) => !inquiry.newArrival);
+---
+
+<BaseLayout
+  title="Products | Smoke Valley Smoke Shop"
+  description="Browse Smoke Valley products and featured brands for vapes, disposables, hookah, glass, accessories, CBD/Hemp, kratom, snacks, drinks, and more in Richmond, TX."
+  path="/products/"
+>
+  <section class="products-hero">
+    <div class="products-hero__background" aria-hidden="true">
+      <img src="/images/brands/top-brands-wall.svg" alt="" loading="eager" />
+    </div>
+    <div class="container-padded relative z-10 py-12 md:py-16">
+      <div class="products-hero__copy">
+        <h1 class="text-4xl font-black text-charcoal-900 md:text-5xl">Products</h1>
+        <p class="mt-4 max-w-3xl text-base leading-7 text-charcoal-700 md:text-lg">
+          Browse product areas and featured brands, then call or message Smoke Valley to ask about current selection. Prices, inventory, checkout, and online ordering are intentionally not enabled online.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad bg-white">
+    <div class="container-padded">
+      <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <label class="grid flex-1 gap-2">
+          <span class="text-sm font-black text-charcoal-900">Search products</span>
+          <input
+            class="min-h-12 rounded-xl border border-smoke-200 bg-white px-4 text-base"
+            id="products-search"
+            type="search"
+            autocomplete="off"
+          />
+        </label>
+        <button class="button-secondary md:min-w-36" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filter-drawer">
+          <SlidersHorizontal size={18} aria-hidden="true" />
+          Filter
+        </button>
+      </div>
+
+      <div class="filter-backdrop" id="filter-backdrop" hidden></div>
+      <aside class="filter-drawer" id="filter-drawer" hidden aria-labelledby="filter-title">
+        <div class="flex items-center justify-between gap-4 border-b border-smoke-200 p-5">
+          <h2 class="text-xl font-black text-charcoal-900" id="filter-title">Filter products</h2>
+          <button class="icon-button" id="filter-close" type="button" aria-label="Close filters">
+            <X size={20} aria-hidden="true" />
+          </button>
+        </div>
+        <form class="grid gap-5 p-5" id="products-filters" role="search">
+          <label class="grid gap-2">
+            <span class="text-sm font-black text-charcoal-900">Category</span>
+            <select class="min-h-12 rounded-xl border border-smoke-200 bg-white px-4 text-base" id="category-filter">
+              <option value="">All categories</option>
+              {categories.map((category) => <option value={category.name}>{category.name}</option>)}
+            </select>
+          </label>
+          <label class="grid gap-2">
+            <span class="text-sm font-black text-charcoal-900">Brand</span>
+            <select class="min-h-12 rounded-xl border border-smoke-200 bg-white px-4 text-base" id="brand-filter">
+              <option value="">All brands</option>
+              {brands.map((brand) => <option value={brand}>{brand}</option>)}
+            </select>
+          </label>
+          <button class="button-secondary" id="clear-filters" type="button">Clear filters</button>
+        </form>
+      </aside>
+
+      <div class="mt-5 flex flex-col gap-3 text-sm font-bold text-smoke-500 sm:flex-row sm:items-center sm:justify-between">
+        <p id="products-results-count" aria-live="polite">{catalogInquiries.length} product topics shown</p>
+        <p>Selection may vary. Call or message the store for current availability.</p>
+      </div>
+
+      <section class="mt-8" data-products-section>
+        <div class="flex items-center justify-between gap-4">
+          <h2 class="text-2xl font-black text-charcoal-900">New arrivals to ask about</h2>
+        </div>
+        <div class="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-4" id="new-arrivals-grid">
+          {newArrivalInquiries.map((inquiry) => <CatalogInquiryCard inquiry={inquiry} />)}
+        </div>
+      </section>
+
+      <section class="mt-10" data-products-section>
+        <h2 class="text-2xl font-black text-charcoal-900">All product topics</h2>
+        <div class="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-4" id="product-grid">
+          {standardInquiries.map((inquiry) => <CatalogInquiryCard inquiry={inquiry} />)}
+        </div>
+      </section>
+
+      <div class="empty-state mt-8 rounded-2xl border border-smoke-200 bg-smoke-50 p-8 text-center" id="products-empty" hidden>
+        <h2 class="text-2xl font-black text-charcoal-900">No matching topics</h2>
+        <p class="mt-2 text-sm font-bold text-smoke-500">Try clearing filters, or call Smoke Valley to ask about what you need.</p>
+        <a class="button-primary mt-5" href={business.phoneHref}>Call Store</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const searchInput = document.getElementById('products-search') as HTMLInputElement | null;
+  const categoryFilter = document.getElementById('category-filter') as HTMLSelectElement | null;
+  const brandFilter = document.getElementById('brand-filter') as HTMLSelectElement | null;
+  const clearButton = document.getElementById('clear-filters') as HTMLButtonElement | null;
+  const filterToggle = document.getElementById('filter-toggle') as HTMLButtonElement | null;
+  const filterClose = document.getElementById('filter-close') as HTMLButtonElement | null;
+  const filterDrawer = document.getElementById('filter-drawer');
+  const filterBackdrop = document.getElementById('filter-backdrop');
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-catalog-card]'));
+  const count = document.getElementById('products-results-count');
+  const empty = document.getElementById('products-empty');
+
+  const setFilterDrawerOpen = (isOpen: boolean) => {
+    if (!filterDrawer || !filterBackdrop || !filterToggle) return;
+    filterDrawer.hidden = !isOpen;
+    filterBackdrop.hidden = !isOpen;
+    filterToggle.setAttribute('aria-expanded', String(isOpen));
+    document.documentElement.classList.toggle('filter-drawer-open', isOpen);
+  };
+
+  const applyFilters = () => {
+    const query = searchInput?.value.trim().toLowerCase() ?? '';
+    const category = categoryFilter?.value ?? '';
+    const brand = brandFilter?.value ?? '';
+    let visible = 0;
+
+    cards.forEach((card) => {
+      const matchesSearch = !query || (card.dataset.search ?? '').includes(query);
+      const matchesCategory = !category || card.dataset.category === category;
+      const matchesBrand = !brand || card.dataset.brand === brand;
+      const shouldShow = matchesSearch && matchesCategory && matchesBrand;
+
+      card.hidden = !shouldShow;
+      if (shouldShow) visible += 1;
+    });
+
+    if (count) count.textContent = `${visible} product topic${visible === 1 ? '' : 's'} shown`;
+    if (empty) empty.hidden = visible !== 0;
+  };
+
+  const params = new URLSearchParams(window.location.search);
+  const categoryFromUrl = params.get('category');
+  if (categoryFromUrl && categoryFilter) {
+    categoryFilter.value = categoryFromUrl;
+  }
+
+  if (params.get('focusSearch') === '1') {
+    window.setTimeout(() => searchInput?.focus(), 250);
+  }
+
+  searchInput?.addEventListener('input', applyFilters);
+  categoryFilter?.addEventListener('change', applyFilters);
+  categoryFilter?.addEventListener('input', applyFilters);
+  brandFilter?.addEventListener('change', applyFilters);
+  brandFilter?.addEventListener('input', applyFilters);
+  clearButton?.addEventListener('click', () => {
+    if (searchInput) searchInput.value = '';
+    if (categoryFilter) categoryFilter.value = '';
+    if (brandFilter) brandFilter.value = '';
+    applyFilters();
+  });
+  filterToggle?.addEventListener('click', () => setFilterDrawerOpen(true));
+  filterClose?.addEventListener('click', () => setFilterDrawerOpen(false));
+  filterBackdrop?.addEventListener('click', () => setFilterDrawerOpen(false));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setFilterDrawerOpen(false);
+  });
+
+  applyFilters();
+</script>

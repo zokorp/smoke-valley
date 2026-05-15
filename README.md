@@ -1,20 +1,21 @@
-# Smoke Valley Smoke Shop Website
+# Smoke Valley Website
 
-This is the Phase 2 public launch website for **Smoke Valley Smoke Shop** in Richmond, Texas.
+This is the public launch website for **Smoke Valley** in Richmond, Texas.
 
 It is a free static local-business website built with Astro, TypeScript, and Tailwind CSS. It is intentionally simple: no database, no Shopify store, no online checkout, no prices, no inventory status, no account creation, and no server-side form handling.
 
-The site includes a 21+ age gate, local business SEO, an inquiry-based static catalog, contact CTAs, Google Maps directions, WhatsApp chat, rewards information, and legal disclaimers.
+The site includes a 21+ age gate, local business SEO, inquiry-based Products page, contact CTAs, Google Maps directions, WhatsApp chat, rewards signup prompts, and legal disclaimers.
 
 ## Important Launch Notes
 
-- The public catalog is inquiry-based until a real product list is ready.
+- The public Products page is inquiry-based until a real product list is ready.
 - Store photos are not shown publicly until real photos are available.
 - Online ordering is intentionally not enabled yet.
 - Prices and inventory are intentionally hidden.
 - The 21+ age gate is included, but valid government-issued ID may still be required in store.
 - CBD/Hemp and kratom copy must not make medical claims.
 - Instagram, Facebook, and Yelp links are hidden until real URLs are available.
+- Rewards signup is configured for a future Remind URL. Until that URL exists, Join Rewards buttons use the store WhatsApp fallback.
 
 ## Local Setup
 
@@ -58,7 +59,7 @@ src/data/business.ts
 
 This controls the public business name, address, phone number, WhatsApp link, email, hours, Google review link, Google Maps directions link, and map embed link.
 
-## Where To Update Public Catalog Topics
+## Where To Update Public Products
 
 Edit:
 
@@ -66,9 +67,23 @@ Edit:
 src/data/catalogInquiries.ts
 ```
 
-The public catalog is category/brand based. It should help customers ask about product areas without claiming exact inventory. Keep CTAs as “Call Store” and “WhatsApp Store.”
+The public Products page is inquiry-based. It should help customers ask about product areas without claiming exact inventory. Product cards can include subcategory and flavor/style examples, but should not imply an item is currently in stock.
 
 Do not add fake prices, fake inventory, add-to-cart buttons, checkout links, or quantity selectors.
+
+Use `newArrival: true` only for inquiry-safe “New arrivals to ask about” cards.
+
+## Where To Update Rewards Signup
+
+Edit:
+
+```text
+src/data/rewards.ts
+```
+
+When the real Remind signup URL is available, set `signupUrl` to that URL. The rewards popup, rewards page button, and header account icon will then use Remind automatically.
+
+If `signupUrl` is `null`, those links use the store WhatsApp fallback.
 
 ## Future Product Data
 
@@ -89,7 +104,7 @@ For the current static launch, keep these settings unless online commerce is int
 - `onlineOrderEligible: false`
 - `shippingEligible: false`
 
-The future-ready product schema still exists for later Shopify or real catalog work. Those records are not rendered as product cards in the Phase 2 public catalog.
+The future-ready product schema still exists for later Shopify or real product work. Those records are not rendered as exact product inventory in the public Products page.
 
 ## Where To Update Categories
 
@@ -200,6 +215,8 @@ The site generates a sitemap and robots file during build:
 
 The Gallery page is hidden from navigation and marked `noindex` until real store photos are ready.
 
+The old `/catalog/` URL redirects to `/products/` through `public/_redirects` for Cloudflare Pages.
+
 ## Future Shopify Migration
 
 See:
@@ -208,14 +225,19 @@ See:
 docs/shopify-migration-plan.md
 ```
 
-The catalog is structured so products can later be migrated or synced to Shopify, but Shopify is not implemented in the current public launch.
+The product data is structured so products can later be migrated or synced to Shopify, but Shopify is not implemented in the current public launch.
 
 ## Maintenance Checklist Before Launch
 
-- Confirm whether the inquiry catalog is enough for launch.
+- Confirm whether the inquiry-based Products page is enough for launch.
 - Add real store/product photos when available.
 - Confirm business hours and contact information.
+- Add the real Remind signup URL when available.
 - Add real Instagram, Facebook, and Yelp URLs.
 - Add Cloudflare Web Analytics token if desired.
 - Confirm CBD/Hemp and kratom copy remains compliant and avoids medical claims.
 - Run `npm run check` and `npm run build`.
+
+## Contact Form Note
+
+The Contact form intentionally remains static and free. It opens the customer’s email app with a prefilled message to `smokevalleyusa@gmail.com`; it does not store submissions on the website.
